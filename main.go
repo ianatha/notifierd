@@ -15,6 +15,7 @@ type Message struct {
 
 type Event struct {
 	Event string   `json:"event"`
+	Chan  string   `json:"chan"`
 	Data  []string `json:"data"`
 }
 

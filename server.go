@@ -90,6 +90,7 @@ func (s *Server) broadcastUpdatedMembers(channelName string) {
 	// Prepare the message
 	message, err := json.Marshal(Event{
 		Event: "members",
+		Chan:  channelName,
 		Data:  userIDs,
 	})
 	if err != nil {
@@ -154,8 +155,11 @@ func (s *Server) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	uid := r.URL.Query().Get("uid")
+
 	client := &Client{
 		conn:     conn,
+		userid:   uid,
 		channels: make(map[string]bool),
 	}
 
